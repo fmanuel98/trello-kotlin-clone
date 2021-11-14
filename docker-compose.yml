@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  #  app:
+  #    build:
+  #      context: .
+  #      dockerfile: src/main/docker/Dockerfile.jvm
+  #   image: app
+  #   environment:
+  #      - QUARKUS_DATASOURCE_URL=jdbc:postgresql://db:5432/trello_clone
+  #   ports:
+  #    - "8080:8080"
+  #   depends_on:
+  #     - db
+  #    condition: service_healthy
+  #   networks:
+  #    - quarkus
+  db:
+    container_name: trello_clone
+    image: postgres:14.0
+    environment:
+      POSTGRES_USER: dockerdev
+      POSTGRES_PASSWORD: dockerdev
+      POSTGRES_DB: trello_clone
+    #    healthcheck:
+    #      test: ["CMD-SHELL", "pg_isready -U quarkus"]
+    #      interval: 5s
+    #      timeout: 5s
+    #      retries: 6
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./trello-pg:/var/lib/postgresql/data
+#  networks: -quarkus
+#
+#networks:
+#  quarkus:
+#    driver: bridge
