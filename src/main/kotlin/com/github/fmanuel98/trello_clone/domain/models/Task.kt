@@ -9,14 +9,15 @@ import org.hibernate.annotations.UpdateTimestamp
 
 @Entity
 class Task(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long = 0,
-    @Column(nullable = false) var name: String? = null,
-    @ManyToOne(optional = false) val user: User? = null,
-    @ManyToOne(optional = false) val card: Card? = null,
-    @CreationTimestamp
-    @Column(nullable = false, updatable = false)
-    val createdAt: OffsetDateTime? = null,
-    @Column(nullable = false) @UpdateTimestamp val updatedAt: OffsetDateTime? = null
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long = 0,
+        @Column(nullable = false) var name: String = "",
+        var done: Boolean = false,
+        @ManyToOne(optional = false) val user: User? = null,
+        @ManyToOne(optional = false) val card: Card? = null,
+        @CreationTimestamp
+        @Column(nullable = false, updatable = false)
+        val createdAt: OffsetDateTime? = null,
+        @Column(nullable = false) @UpdateTimestamp val updatedAt: OffsetDateTime? = null
 )
 
 @ApplicationScoped class TaskRepository : PanacheRepository<Task>
